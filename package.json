@@ -1,6 +1,6 @@
 {
   "name": "@smartledger/schema-icu-sdk",
-  "version": "1.0.1",
+  "version": "1.0.2",
   "description": "Production-ready SDK for Schema.ICU - Structured AI with cryptographic verification",
   "main": "src/index.js",
   "bin": {
