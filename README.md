@@ -348,23 +348,21 @@ Contributions welcome! Please read our [Contributing Guide](CONTRIBUTING.md).
 
 ## License
 
-MIT © Team Watson
+MIT © SmartLedger Technologies
 
 ## Links
 
 - [Schema.ICU Website](https://schema.icu)
 - [API Documentation](https://schema.icu/docs/API_DOCS.html)
-- [GitHub Repository](https://github.com/team-watson/schema-icu-sdk)
-- [Issue Tracker](https://github.com/team-watson/schema-icu-sdk/issues)
+- [GitHub Repository](https://github.com/codenlighten/schema-icu-sdk)
+- [Issue Tracker](https://github.com/codenlighten/schema-icu-sdk/issues)
 
 ## Support
 
 - 📧 Email: support@smartledger.technology
 - 📚 Documentation: https://schema.icu/docs
-- 💬 GitHub Issues: https://github.com/team-watson/schema-icu-sdk/issues
+- 💬 GitHub Issues: https://github.com/codenlighten/schema-icu-sdk/issues
 
 ---
 
-**Built with ❤️ by Team Watson**
-
-*Powered by SmartLedger Technologies*
+**Built with ❤️ by SmartLedger Technologies**

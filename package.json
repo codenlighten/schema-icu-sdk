@@ -23,7 +23,7 @@
     "structured-ai",
     "cryptographic-verification"
   ],
-  "author": "Team Watson",
+  "author": "SmartLedger Technologies <support@smartledger.technology> (https://smartledger.technology)",
   "license": "MIT",
   "type": "commonjs",
   "engines": {
