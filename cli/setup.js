@@ -230,7 +230,7 @@ async function saveConfiguration(credentials) {
   console.log(`✅ Configuration saved to: ${envPath}\n`);
   console.log('📦 You can now use the Schema.ICU SDK!\n');
   console.log('Quick Start:\n');
-  console.log('  const { SchemaICU } = require(\'@schema-icu/schema-icu-sdk\');');
+  console.log('  const { SchemaICU } = require(\'@smartledger/schema-icu-sdk\');');
   console.log('  const client = new SchemaICU();');
   console.log('  const result = await client.codeGenerator.generate(\'Create a hello world function\');\n');
 }

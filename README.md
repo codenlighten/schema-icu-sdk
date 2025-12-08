@@ -2,7 +2,7 @@
 
 > Production-ready Node.js SDK for Schema.ICU - Structured AI with cryptographic verification
 
-[![NPM Version](https://img.shields.io/badge/npm-1.0.0-blue.svg)](https://www.npmjs.com/package/@schema-icu/schema-icu-sdk)
+[![NPM Version](https://img.shields.io/badge/npm-1.0.0-blue.svg)](https://www.npmjs.com/package/@smartledger/schema-icu-sdk)
 [![License](https://img.shields.io/badge/license-MIT-green.svg)](LICENSE)
 
 ## Features
@@ -18,7 +18,7 @@
 ## Installation
 
 ```bash
-npm install @schema-icu/schema-icu-sdk
+npm install @smartledger/schema-icu-sdk
 ```
 
 ## Quick Start
@@ -45,7 +45,7 @@ This will guide you through:
 ### 2. Basic Usage
 
 ```javascript
-const { SchemaICU } = require('@schema-icu/schema-icu-sdk');
+const { SchemaICU } = require('@smartledger/schema-icu-sdk');
 
 // Initialize client (loads credentials from .env)
 const client = new SchemaICU();
@@ -80,7 +80,7 @@ console.log(result.data.code);
 ### Code Generation
 
 ```javascript
-const { SchemaICU } = require('@schema-icu/schema-icu-sdk');
+const { SchemaICU } = require('@smartledger/schema-icu-sdk');
 const client = new SchemaICU();
 
 const result = await client.codeGenerator.generate(
@@ -156,7 +156,7 @@ console.log(schema);
 ### Login Programmatically
 
 ```javascript
-const { SchemaICU } = require('@schema-icu/schema-icu-sdk');
+const { SchemaICU } = require('@smartledger/schema-icu-sdk');
 const client = new SchemaICU();
 
 const loginResult = await client.auth.login('email@example.com', 'password');
@@ -206,7 +206,7 @@ SCHEMA_ICU_PORT=443
 ### Programmatic Configuration
 
 ```javascript
-const { SchemaICU, Config } = require('@schema-icu/schema-icu-sdk');
+const { SchemaICU, Config } = require('@smartledger/schema-icu-sdk');
 
 const config = new Config({
   apiKey: 'your_api_key',
@@ -245,7 +245,7 @@ const {
   ValidationError,
   RateLimitError,
   APIError 
-} = require('@schema-icu/schema-icu-sdk');
+} = require('@smartledger/schema-icu-sdk');
 
 const client = new SchemaICU();
 
