@@ -1,0 +1,44 @@
+{
+  "name": "@schema.icu/schema-icu-sdk",
+  "version": "1.0.0",
+  "description": "Production-ready SDK for Schema.ICU - Structured AI with cryptographic verification",
+  "main": "src/index.js",
+  "bin": {
+    "schema-icu": "./cli/index.js"
+  },
+  "scripts": {
+    "test": "node test/auth.test.js && node test/agents.test.js",
+    "setup": "node cli/setup.js",
+    "example:basic": "node examples/basic-usage.js",
+    "example:improve": "node examples/code-improvement.js",
+    "example:plan": "node examples/project-planning.js"
+  },
+  "keywords": [
+    "schema-icu",
+    "ai",
+    "sdk",
+    "code-generation",
+    "code-improvement",
+    "ai-agents",
+    "structured-ai",
+    "cryptographic-verification"
+  ],
+  "author": "Team Watson",
+  "license": "MIT",
+  "type": "commonjs",
+  "engines": {
+    "node": ">=14.0.0"
+  },
+  "dependencies": {
+    "dotenv": "^17.2.3"
+  },
+  "devDependencies": {},
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/codenlighten/schema-icu-sdk.git"
+  },
+  "bugs": {
+    "url": "https://github.com/codenlighten/schema-icu-sdk/issues"
+  },
+  "homepage": "https://github.com/codenlighten/schema-icu-sdk#readme"
+}
