@@ -9,6 +9,7 @@
 
 - 🎯 **11 Specialized AI Agents** - Code generation, schema design, project planning, and more
 - 🔐 **Cryptographic Verification** - Every response is signed with BSV cryptography
+- 🛡️ **Post-Quantum Ready** - ML-DSA-65/87 quantum-resistant signatures (NIST FIPS 204)
 - ✅ **JSON Schema Validation** - Guaranteed structured outputs
 - 🚀 **Production Ready** - Error handling, rate limiting, 99.9% uptime SLA
 - ⚡ **Cost Optimized** - GPT-5-nano at $0.05/1M tokens (96% cheaper than GPT-4)
@@ -56,7 +57,9 @@ const result = await client.codeGenerator.generate(
   { language: 'JavaScript', style: 'modern ES6+' }
 );
 
-console.log(result.data.code);
+console.log(result.code);
+console.log('Complexity:', result.complexity);
+console.log('Reasoning:', result.reasoning);
 ```
 
 ## Available Agents
@@ -92,9 +95,9 @@ const result = await client.codeGenerator.generate(
   }
 );
 
-console.log(result.data.code);
-console.log('Complexity:', result.data.complexity);
-console.log('Reasoning:', result.data.reasoning);
+console.log(result.code);
+console.log('Complexity:', result.complexity);
+console.log('Reasoning:', result.reasoning);
 ```
 
 ### Code Improvement
@@ -115,9 +118,9 @@ const result = await client.diffImprover.improve(code, {
   focusAreas: ['performance', 'security', 'readability']
 });
 
-console.log('Improved:', result.data.improvedCode);
-console.log('Diff:', result.data.diff);
-console.log('Explanation:', result.data.explanation);
+console.log('Improved:', result.improvedCode);
+console.log('Diff:', result.diff);
+console.log('Explanation:', result.explanation);
 ```
 
 ### Project Planning
@@ -131,11 +134,10 @@ const result = await client.projectPlanner.plan(
   }
 );
 
-const plan = result.data;
-console.log(`Project: ${plan.projectName}`);
-console.log(`Tasks: ${plan.tasks.length}`);
+console.log(`Project: ${result.projectName}`);
+console.log(`Tasks: ${result.tasks.length}`);
 
-plan.tasks.forEach(task => {
+result.tasks.forEach(task => {
   console.log(`- ${task.taskName} (${task.estimatedTimeHours}h)`);
 });
 ```
@@ -147,7 +149,7 @@ const result = await client.schemaGenerator.generate(
   'Create a schema for a product catalog with categories'
 );
 
-const schema = JSON.parse(result.data.schemaAsString);
+const schema = JSON.parse(result.schemaAsString);
 console.log(schema);
 ```
 
@@ -264,6 +266,134 @@ try {
 }
 ```
 
+## Post-Quantum Cryptography
+
+Schema.ICU supports quantum-resistant cryptographic signatures using **ML-DSA** (Module-Lattice-Based Digital Signature Algorithm) based on [NIST FIPS 204](https://csrc.nist.gov/pubs/fips/204/final).
+
+### Why Post-Quantum?
+
+Current ECDSA signatures will be vulnerable when practical quantum computers emerge (~10-20 years). ML-DSA signatures are quantum-resistant **today**, ensuring your cryptographic proofs remain valid in the post-quantum era.
+
+### Available Algorithms
+
+| Algorithm | Security Level | Signature Size | Use Case |
+|-----------|---------------|----------------|----------|
+| **ECDSA** (default) | Classical | ~88 chars | Standard use, smallest size |
+| **ml-dsa-65** | NIST Level 3 | ~4,412 chars (50x) | Recommended for most PQ needs |
+| **ml-dsa-87** | NIST Level 5 | ~6,172 chars (70x) | Maximum security, high-value ops |
+| **pq** (alias) | NIST Level 5 | ~6,172 chars (70x) | Shorthand for ml-dsa-87 |
+
+### Usage Methods
+
+#### Method 1: Pass in Context
+
+```javascript
+const result = await client.codeGenerator.generate(
+  'Create a secure authentication function',
+  {
+    signatureAlgorithm: 'ml-dsa-65',
+    language: 'JavaScript'
+  }
+);
+
+console.log('Algorithm:', result.signature.algorithm);        // 'ml-dsa-65'
+console.log('Quantum-resistant:', result.signature.quantumResistant); // true
+console.log('Signature length:', result.signature.signature.length);   // ~4412
+```
+
+#### Method 2: Client Helper Methods
+
+```javascript
+// Set post-quantum for all subsequent requests
+client.usePostQuantum('ml-dsa-87');
+console.log(client.getSignatureAlgorithm()); // 'ml-dsa-87'
+
+const result = await client.codeGenerator.generate('...');
+// Will use ML-DSA-87 signature
+
+// Switch back to ECDSA
+client.useECDSA();
+console.log(client.getSignatureAlgorithm()); // 'ecdsa'
+```
+
+#### Method 3: Use PQ Alias
+
+```javascript
+// 'pq' is a convenient shorthand for 'ml-dsa-87'
+const result = await client.schemaGenerator.generate(
+  'Create a user schema',
+  { signatureAlgorithm: 'pq' }
+);
+
+console.log(result.signature.algorithm); // 'ml-dsa-87'
+```
+
+### All Agents Support PQ
+
+Post-quantum signatures work with **all agents**:
+
+```javascript
+// Base Agent
+await client.base.query('...', { signatureAlgorithm: 'ml-dsa-65' });
+
+// Code Generator
+await client.codeGenerator.generate('...', { signatureAlgorithm: 'ml-dsa-87' });
+
+// Code Improver
+await client.codeImprover.improve('...', { signatureAlgorithm: 'pq' });
+
+// Schema Generator
+await client.schemaGenerator.generate('...', { signatureAlgorithm: 'ml-dsa-65' });
+
+// Project Planner
+await client.projectPlanner.plan('...', { signatureAlgorithm: 'ml-dsa-87' });
+
+// And all other agents...
+```
+
+### Enhanced Signature Response
+
+When using post-quantum signatures, the response includes additional metadata:
+
+```javascript
+{
+  signature: {
+    hash: "992ca02ee975884200cdb5c567eff3dbb9b916b1fd93c758be7dd876213371b1",
+    signature: "5nnm5y9SHZTQijl2y2/Arm1dkqzDfmvTAlmbKSPiK3Q3tO...",
+    publicKey: "8a4b02f0eafac5d36676e5b68d05667e23a295185cf45a0c04ac04fe7d9bcd89",
+    algorithm: "ml-dsa-65",                    // Signature algorithm used
+    suite: "ml-dsa-65",                        // Cryptographic suite
+    quantumResistant: true,                    // NEW: Indicates quantum resistance
+    signedAt: "2025-12-19T05:13:51.125Z"
+  }
+}
+```
+
+### Best Practices
+
+1. **Default to ML-DSA-65** for most production use cases - good balance of security and size
+2. **Use ML-DSA-87** for high-value operations requiring maximum security
+3. **Use PQ alias** for convenience when you want the strongest protection
+4. **Consider signature size** - PQ signatures are 50-70x larger than ECDSA
+5. **Test performance** - PQ signatures may take slightly longer to generate
+
+### Complete Example
+
+See [`examples/post-quantum-signatures.js`](./examples/post-quantum-signatures.js) for a comprehensive demonstration.
+
+```javascript
+// Quick comparison of all algorithms
+const results = {
+  ecdsa: await client.base.query('test'),
+  mldsa65: await client.base.query('test', { signatureAlgorithm: 'ml-dsa-65' }),
+  mldsa87: await client.base.query('test', { signatureAlgorithm: 'ml-dsa-87' })
+};
+
+console.log('ECDSA:', results.ecdsa.signature.signature.length, 'chars');
+console.log('ML-DSA-65:', results.mldsa65.signature.signature.length, 'chars (quantum-safe)');
+console.log('ML-DSA-87:', results.mldsa87.signature.signature.length, 'chars (quantum-safe)');
+```
+
 ## API Reference
 
 ### SchemaICU Client
@@ -289,6 +419,12 @@ client.githubAgent       // GitHubAgent
 client.isAuthenticated()
 client.getConfig()
 client.updateConfig(options)
+
+// Post-Quantum Helper Methods (v1.0.4+)
+client.usePostQuantum(algorithm)      // Set PQ algorithm ('ml-dsa-65', 'ml-dsa-87', 'pq')
+client.useECDSA()                     // Switch back to ECDSA (default)
+client.getSignatureAlgorithm()        // Get current algorithm
+client.setSignatureAlgorithm(algorithm) // Set custom algorithm
 ```
 
 ### Common Response Format
@@ -298,18 +434,26 @@ All API responses include:
 ```javascript
 {
   success: true,
-  data: {
-    // Agent-specific data
-  },
+  // Agent-specific data fields at top level
+  code: "...",              // For code generator
+  improvedCode: "...",      // For code improver
+  schemaAsString: "...",    // For schema generator
+  projectName: "...",       // For project planner
+  tasks: [],                // For project planner
+  // Common fields
   timestamp: "2025-12-08T13:52:42.655Z",
   signature: {
     hash: "...",
     signature: "...",
     publicKey: "...",
+    algorithm: "ecdsa",
+    suite: "bsv-ecdsa-secp256k1",
     signedAt: "2025-12-08T13:52:42.719Z"
   }
 }
 ```
+
+**Note:** Response data is at the top level, not nested under a `data` property.
 
 ## Pricing
 

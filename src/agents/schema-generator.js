@@ -13,12 +13,24 @@ class SchemaGenerator {
 
   /**
    * Generate JSON schema
+   * @param {string} query - The schema generation request
+   * @param {object} context - Additional context (can include signatureAlgorithm)
    */
   async generate(query, context = {}) {
-    const response = await this.http.post(this.endpoint, {
+    // Extract signatureAlgorithm from context if provided
+    const { signatureAlgorithm, ...restContext } = context;
+    
+    const requestBody = {
       query,
-      context
-    });
+      context: restContext
+    };
+    
+    // Add signatureAlgorithm at top level if specified
+    if (signatureAlgorithm) {
+      requestBody.signatureAlgorithm = signatureAlgorithm;
+    }
+    
+    const response = await this.http.post(this.endpoint, requestBody);
 
     return response.data;
   }

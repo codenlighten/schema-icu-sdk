@@ -35,6 +35,9 @@ class SchemaICU {
     this.promptImprover = new PromptImprover(this.config);
     this.toolChoice = new ToolChoice(this.config);
     this.githubAgent = new GitHubAgent(this.config);
+    
+    // Default signature algorithm
+    this.signatureAlgorithm = null; // null = API default (ECDSA)
   }
 
   /**
@@ -61,6 +64,43 @@ class SchemaICU {
    */
   updateConfig(options) {
     Object.assign(this.config, options);
+  }
+
+  /**
+   * Use post-quantum signatures (ML-DSA-65 or ML-DSA-87)
+   * @param {string} algorithm - 'ml-dsa-65', 'ml-dsa-87', or 'pq' (defaults to ml-dsa-87)
+   */
+  usePostQuantum(algorithm = 'ml-dsa-87') {
+    const validAlgorithms = ['ml-dsa-65', 'ml-dsa-87', 'pq'];
+    if (!validAlgorithms.includes(algorithm)) {
+      throw new Error(`Invalid post-quantum algorithm. Use: ${validAlgorithms.join(', ')}`);
+    }
+    this.signatureAlgorithm = algorithm;
+    return this;
+  }
+
+  /**
+   * Use standard ECDSA signatures (default)
+   */
+  useECDSA() {
+    this.signatureAlgorithm = null;
+    return this;
+  }
+
+  /**
+   * Get current signature algorithm
+   */
+  getSignatureAlgorithm() {
+    return this.signatureAlgorithm || 'ecdsa';
+  }
+
+  /**
+   * Set custom signature algorithm
+   * @param {string} algorithm - Signature algorithm ('ecdsa', 'ml-dsa-65', 'ml-dsa-87', 'pq', or null)
+   */
+  setSignatureAlgorithm(algorithm) {
+    this.signatureAlgorithm = algorithm;
+    return this;
   }
 }
 
