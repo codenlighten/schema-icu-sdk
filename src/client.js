@@ -15,6 +15,8 @@ const { ProjectPlanner } = require('./agents/project-planner');
 const { PromptImprover } = require('./agents/prompt-improver');
 const { ToolChoice } = require('./agents/tool-choice');
 const { GitHubAgent } = require('./agents/github-agent');
+const { SummaryAgent } = require('./agents/summary-agent');
+const { EmailAgent } = require('./agents/email-agent');
 
 class SchemaICU {
   constructor(options = {}) {
@@ -35,6 +37,8 @@ class SchemaICU {
     this.promptImprover = new PromptImprover(this.config);
     this.toolChoice = new ToolChoice(this.config);
     this.githubAgent = new GitHubAgent(this.config);
+    this.summaryAgent = new SummaryAgent(this.config);
+    this.emailAgent = new EmailAgent(this.config);
     
     // Default signature algorithm
     this.signatureAlgorithm = null; // null = API default (ECDSA)
