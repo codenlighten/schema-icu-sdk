@@ -1,7 +1,7 @@
 {
   "name": "@smartledger/schema-icu-sdk",
-  "version": "1.0.4",
-  "description": "Production-ready SDK for Schema.ICU - Structured AI with cryptographic verification and post-quantum signatures",
+  "version": "1.0.6",
+  "description": "Revolutionary SDK with Future Self Bridge architecture, post-quantum cryptography, and memory-aware agents",
   "main": "src/index.js",
   "bin": {
     "schema-icu": "cli/index.js"
