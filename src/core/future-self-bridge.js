@@ -17,7 +17,7 @@
  * - Future Self Bridge pattern (self-aware schema planning)
  */
 
-const HTTPClient = require('../utils/http');
+const { HTTPClient } = require('../utils/http');
 
 class FutureSelfBridge {
   constructor(config) {
