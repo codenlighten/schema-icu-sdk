@@ -492,7 +492,7 @@ Contributions welcome! Please read our [Contributing Guide](CONTRIBUTING.md).
 
 ## License
 
-MIT © SmartLedger Technologies
+[MIT](LICENSE) © 2025 Gregory J. Ward, Bryan W. Daugherty, Shawn M. Ryan
 
 ## Links
 
