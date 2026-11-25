@@ -2,7 +2,7 @@
 
 > **Status: experimental.** Claims in this README about scale, speed, security or readiness are design goals or earlier drafts unless they point to a test, measurement or audit report. No independent audit is claimed.
 
-> Production-ready Node.js SDK for Schema.ICU - Structured AI with cryptographic verification
+> Node.js SDK for Schema.ICU - Structured AI with cryptographic verification
 
 [![NPM Version](https://img.shields.io/badge/npm-1.0.0-blue.svg)](https://www.npmjs.com/package/@smartledger/schema-icu-sdk)
 [![License](https://img.shields.io/badge/license-MIT-green.svg)](LICENSE)
@@ -11,9 +11,9 @@
 
 - 🎯 **11 Specialized AI Agents** - Code generation, schema design, project planning, and more
 - 🔐 **Cryptographic Verification** - Every response is signed with BSV cryptography
-- 🛡️ **Post-Quantum Ready** - ML-DSA-65/87 quantum-resistant signatures (NIST FIPS 204)
+- 🛡️ **Post-quantum signatures** - ML-DSA-65/87 (NIST FIPS 204)
 - ✅ **JSON Schema Validation** - Guaranteed structured outputs
-- 🚀 **Production Ready** - Error handling, rate limiting, 99.9% uptime SLA
+- 🚀 **Reliability features** - Error handling and rate limiting
 - ⚡ **Cost Optimized** - GPT-5-nano at $0.05/1M tokens (96% cheaper than GPT-4)
 - 🛠️ **Interactive CLI** - Setup wizard and command-line tools
 - 📦 **TypeScript Ready** - Full type definitions (coming soon)
@@ -69,7 +69,7 @@ console.log('Reasoning:', result.reasoning);
 | Agent | Endpoint | Description |
 |-------|----------|-------------|
 | **Base Agent** | `client.base` | General-purpose with code generation |
-| **Code Generator** | `client.codeGenerator` | Production-ready code in any language |
+| **Code Generator** | `client.codeGenerator` | Generates code in many languages |
 | **Schema Generator** | `client.schemaGenerator` | JSON schemas with validation rules |
 | **Terminal Agent** | `client.terminalAgent` | Optimal shell commands |
 | **Code Improver** | `client.codeImprover` | Optimize without breaking changes |
@@ -274,7 +274,7 @@ Schema.ICU supports quantum-resistant cryptographic signatures using **ML-DSA** 
 
 ### Why Post-Quantum?
 
-Current ECDSA signatures will be vulnerable when practical quantum computers emerge (~10-20 years). ML-DSA signatures are quantum-resistant **today**, ensuring your cryptographic proofs remain valid in the post-quantum era.
+Current ECDSA signatures are expected to become vulnerable if practical quantum computers emerge. ML-DSA (FIPS 204) is designed to resist known quantum attacks.
 
 ### Available Algorithms
 
