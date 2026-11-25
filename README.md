@@ -1,5 +1,7 @@
 # Schema.ICU SDK
 
+> **Status: experimental.** Claims in this README about scale, speed, security or readiness are design goals or earlier drafts unless they point to a test, measurement or audit report. No independent audit is claimed.
+
 > Production-ready Node.js SDK for Schema.ICU - Structured AI with cryptographic verification
 
 [![NPM Version](https://img.shields.io/badge/npm-1.0.0-blue.svg)](https://www.npmjs.com/package/@smartledger/schema-icu-sdk)
